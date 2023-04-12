@@ -15,15 +15,24 @@ param (
 
 Write-Verbose "Starting InactivityTimeoutSetUp.ps1 script..."
 
-$path = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
-$name = 'InactivityTimeoutSecs'
+$path     = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+$name     = 'InactivityTimeoutSecs'
+$property = Get-ItemProperty -Path $path -Name $name -ErrorAction SilentlyContinue
 
+Write-Verbose "New inactivity timeout value entered by the user: $screenTimout"
 try 
 { 
-     
-     Write-Verbose "New inactivity timeout value: $screenTimout"
-     Set-ItemProperty -Path $path -Name $name -Value $screenTimeout 
-     Write-Verbose "New inactivity timeout value updated"
+     if ($property -ne $null){
+        Write-Verbose "The registry entry alrealdy exists"
+        Set-ItemProperty -Path $path -Name $name -Value $screenTimeout 
+        Write-Verbose "New inactivity timeout value updated"
+     }
+     else{
+        Write-Verbose "The registry entry does not exists"
+        New-ItemProperty -Path $path -Name $name -Value $screenTimeout -PropertyType DWord
+        Write-Verbose "Registry entry created with a timeout value of $screenTimeout"
+        
+     }
         
 } 
 catch { 
