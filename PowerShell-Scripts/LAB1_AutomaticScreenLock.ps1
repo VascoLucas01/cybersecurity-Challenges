@@ -13,7 +13,7 @@ param (
     [string]$screenTimeout
 )
 
-Write-Verbose "Starting InactivityTimeoutSetUp.ps1 script..."
+Write-Verbose "Starting LAB1_AutomaticScreenLock.ps1 script..."
 
 $path     = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
 $name     = 'InactivityTimeoutSecs'
@@ -40,4 +40,4 @@ catch {
      Write-Output $_.Exception.Message 
 }
 
-Write-Verbose "Ending InactivityTimeoutSetUp.ps1 script..." 
+Write-Verbose "Ending LAB1_AutomaticScreenLock.ps1 script..." 
