@@ -2,9 +2,10 @@
 # Purpose: The user needs to enter a value in seconds which will be the timeout to lock the computer's screen due to inactivity 
 # Why    : As a measure of security.
 
-####################IMPORTANT NOTES###########################
-# Too see more detailed information enter the switch -verbose
-##############################################################
+#####################IMPORTANT NOTES############################
+# 1. Too see more detailed information enter the switch -verbose
+# 2. Restart the machine so that the policy take effect
+################################################################
 
 [CmdletBinding()]
 param (
