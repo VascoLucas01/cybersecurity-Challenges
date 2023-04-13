@@ -54,7 +54,6 @@ email_sender    = input("\nEnter an email to use as necessary: ")
 email_password  = input("\nEnter the password: ")
 target_ip       = input("Enter your target IP: ")
 
-
 last_state = "None"
 
 # infinite loop
