@@ -49,15 +49,15 @@ target_ip = input("Enter your target IP: ")
 # infinite loop
 while True:
     # store the output in the variable ping_output
-    ping_output = subprocess.run(["ping","-c","1",target_ip], stdout=subprocess.PIPE);
-    
+    ping_output = subprocess.run(["ping","-n","1",target_ip], stdout=subprocess.PIPE);
+
     # status' verification
-    if "1 received" in ping_output.stdout.decode('utf-8'):
-        #print_timestamp("Network Active",target_ip)
-        print_timestamp_2_file("Network Active",target_ip,filename)
+    if "Received = 1" in ping_output.stdout.decode('utf-8'):
+        print_timestamp("Network Active",target_ip)
+        #print_timestamp_2_file("Network Active",target_ip,filename)
     else:
-        #print_timestamp("Network Inactive",target_ip)
-        print_timestamp_2_file("Network Active",target_ip,filename)    
+        print_timestamp("Network Inactive",target_ip)
+        #print_timestamp_2_file("Network Active",target_ip,filename)    
     
     # pings every 2 seconds
     time.sleep(2)
