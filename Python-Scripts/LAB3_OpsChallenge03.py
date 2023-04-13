@@ -55,7 +55,7 @@ email_password  = input("\nEnter the password: ")
 target_ip       = input("Enter your target IP: ")
 
 
-last_state = "DOWN"
+last_state = "None"
 
 # infinite loop
 while True:
