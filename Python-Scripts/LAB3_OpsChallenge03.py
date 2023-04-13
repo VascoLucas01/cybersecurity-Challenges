@@ -68,7 +68,6 @@ while True:
         if last_state == "DOWN":
             sendEmail(email_sender,email_password,target_ip,"UP")
             last_state = "UP"
-
     else:
         if last_state == None:
             last_state = "DOWN"        
