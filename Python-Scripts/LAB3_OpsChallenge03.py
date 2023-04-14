@@ -24,7 +24,7 @@ def sendEmail(email_sender,email_password,host,status):
     timestamp        = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
     email_receiver   = 'cyberpractitioner00@gmail.com'
 
-    subject = f'[REPORT] Target IP: {host}'
+    subject          = f'[REPORT] Target IP: {host}'
     
     if "UP" == status:
         body = f'[Date and Time: {timestamp}]\n\nStatus of {host} change from DOWN to UP'
@@ -54,7 +54,7 @@ email_sender    = input("\nEnter an email to use as necessary: ")
 email_password  = input("\nEnter the password: ")
 target_ip       = input("Enter your target IP: ")
 
-last_state = "None"
+last_state      = "None"
 
 # infinite loop
 while True:
