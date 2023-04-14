@@ -41,7 +41,7 @@ def print_timestamp_2_file(str,ip,file):
 print_timestamp("\nStarting script LAB2_OpsChallenge02.py...",None)
 
 # filename to store the ping's status
-filename = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
+filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
 
 # inputs the user to enter the target IP
 target_ip = input("Enter your target IP: ")
