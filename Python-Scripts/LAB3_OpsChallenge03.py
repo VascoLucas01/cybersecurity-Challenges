@@ -60,7 +60,7 @@ context = ssl.create_default_context()
 with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
     smtp.login(email_sender, email_password)
 
-last_state = "None"
+    last_state = "None"
 
     # infinite loop
     while True:
