@@ -15,12 +15,11 @@ from email.message import EmailMessage
 
 # Function name: send an email
 # Purpose      : notify the administrator everytime the host status change
-# Arguments    : email_sender, status
+# Arguments    : email_sender, email_password, host, status
 # Return       : none
-def sendEmail(email_sender,status):
+def sendEmail(email_sender,email_password,host,status):
     # in order to hide my username and password from public repositories, it was created two environment variables
-    # email_sender   = 'cyberpractitioner00@gmail.com'
-    # email_password = os.environ.get('PASSWORD')
+    email_sender     = 'cyberpractitioner00@gmail.com'
     timestamp        = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
     email_receiver   = 'cyberpractitioner00@gmail.com'
 
@@ -40,8 +39,8 @@ def sendEmail(email_sender,status):
     context = ssl.create_default_context()
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(email_sender, email_password)
         smtp.sendmail(email_sender, email_receiver, em.as_string())
-
 
 
 # main
@@ -51,18 +50,22 @@ print("\nStarting script LAB3_OpsChallenge03.py...\n")
 # inputs the user to enter the email sender, email password and target IP
 email_sender    = input("\nEnter an email to use as necessary: ")
 email_password  = input("\nEnter the password: ")
+# email_password  = os.environ.get('PASSWORD')
 target_ip       = input("Enter your target IP: ")
 
-last_state      = "None"
 
 # login
-smtp.login(email_sender, email_password)
+context = ssl.create_default_context()
 
+with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+    smtp.login(email_sender, email_password)
 
-# infinite loop
-while True:
-    # store the output in the variable ping_output
-    ping_output = subprocess.run(["ping","-n","1",target_ip], stdout=subprocess.PIPE);
+last_state = "None"
+
+    # infinite loop
+    while True:
+        # store the output in the variable ping_output
+        ping_output = subprocess.run(["ping","-n","1",target_ip], stdout=subprocess.PIPE);
 
     # status' verification
     if "Received = 1" in ping_output.stdout.decode('utf-8'):
