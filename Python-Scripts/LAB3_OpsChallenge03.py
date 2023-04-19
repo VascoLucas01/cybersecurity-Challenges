@@ -15,9 +15,9 @@ from email.message import EmailMessage
 
 # Function name: send an email
 # Purpose      : notify the administrator everytime the host status change
-# Arguments    : email_sender, email_password, host, status
+# Arguments    : email_sender, status
 # Return       : none
-def sendEmail(email_sender,email_password,host,status):
+def sendEmail(email_sender,status):
     # in order to hide my username and password from public repositories, it was created two environment variables
     # email_sender   = 'cyberpractitioner00@gmail.com'
     # email_password = os.environ.get('PASSWORD')
@@ -40,7 +40,6 @@ def sendEmail(email_sender,email_password,host,status):
     context = ssl.create_default_context()
 
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-        smtp.login(email_sender, email_password)
         smtp.sendmail(email_sender, email_receiver, em.as_string())
 
 
@@ -55,6 +54,10 @@ email_password  = input("\nEnter the password: ")
 target_ip       = input("Enter your target IP: ")
 
 last_state      = "None"
+
+# login
+smtp.login(email_sender, email_password)
+
 
 # infinite loop
 while True:
