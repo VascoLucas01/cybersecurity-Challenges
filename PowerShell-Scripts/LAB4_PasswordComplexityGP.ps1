@@ -37,6 +37,5 @@ if ($input -eq 'n'){
 rm -force "C:\secpol\securityconfig.cfg" -Force -Confirm:$false
 
 # References
-# https://social.technet.microsoft.com/Forums/office/en-US/50c827f8-0b8f-4b07-a90f-582948187ccb/disabling-password-complexity-via-powershell?forum=winserverpowershell
 
 
