@@ -67,19 +67,19 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         # store the output in the variable ping_output
         ping_output = subprocess.run(["ping","-n","1",target_ip], stdout=subprocess.PIPE);
 
-    # status' verification
-    if "Received = 1" in ping_output.stdout.decode('utf-8'):
-        if last_state == None:
-            last_state = "UP"
-        if last_state == "DOWN":
-            sendEmail(email_sender,email_password,target_ip,"UP")
-            last_state = "UP"
-    else:
-        if last_state == None:
-            last_state = "DOWN"        
-        if last_state == "UP":
-            sendEmail(email_sender,email_password,target_ip,"DOWN")
-            last_state = "DOWN"
+         # status' verification
+        if "Received = 1" in ping_output.stdout.decode('utf-8'):
+            if last_state == None:
+                last_state = "UP"
+            if last_state == "DOWN":
+                sendEmail(email_sender,email_password,target_ip,"UP")
+                last_state = "UP"
+        else:
+            if last_state == None:
+                last_state = "DOWN"        
+            if last_state == "UP":
+                sendEmail(email_sender,email_password,target_ip,"DOWN")
+                last_state = "DOWN"
     
-    # pings every 2 seconds
-    time.sleep(2)
+        # pings every 2 seconds
+        time.sleep(2)
