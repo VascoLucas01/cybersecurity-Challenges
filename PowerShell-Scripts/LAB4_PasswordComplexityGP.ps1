@@ -4,7 +4,6 @@
 
 # EXAMPLE: ./LAB4_PssswordComplexityGP.ps1
 
-
 # enter 'y' to enable
 # enter 'n' to disable
 $input = Read-Host "Do you want to enable Password Complexity? (y,n)"
