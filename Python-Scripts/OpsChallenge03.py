@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-#Script : LAB3_OpsChallenge03.py
-#Purpose: 
-#Why    : 
+#Script : OpsChallenge03.py
+#Purpose: Sends an email.
+#Why    : It is an automation.
 
 # import libraries
 import os
