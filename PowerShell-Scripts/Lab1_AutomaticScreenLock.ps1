@@ -1,4 +1,4 @@
-# Script : LAB1_AutomaticScreenLock.ps1
+# Script : Lab1_AutomaticScreenLock.ps1
 # Purpose: The user needs to enter a value in seconds which will be the timeout to lock the computer's screen due to inactivity 
 # Why    : As a measure of security.
 
