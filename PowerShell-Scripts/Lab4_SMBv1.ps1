@@ -1,4 +1,4 @@
-# Script : LAB4_SMBv1.ps1
+# Script : Lab4_SMBv1.ps1
 # Purpose: Automate the process of disable SMBv1
 # Why    : As a measure of security.
 
