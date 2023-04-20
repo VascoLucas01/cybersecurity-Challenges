@@ -1,5 +1,5 @@
 # Script : OpsChallenge05_FileEncryption.ps1
-# Purpose: Encrypt a file
+# Purpose: Encrypts a file
 # Why    : As a measure of security.
 
 [CmdletBinding()]
