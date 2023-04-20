@@ -15,9 +15,9 @@ from email.message import EmailMessage
 
 # Function name: send an email
 # Purpose      : notify the administrator everytime the host status change
-# Arguments    : email_sender, email_password, host, status
+# Arguments    : email_sender, host, status
 # Return       : none
-def sendEmail(email_sender,email_password,host,status):
+def sendEmail(email_sender,host,status):
     # in order to hide my username and password from public repositories, it was created two environment variables
     email_sender     = 'cyberpractitioner00@gmail.com'
     timestamp        = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
@@ -36,11 +36,7 @@ def sendEmail(email_sender,email_password,host,status):
     em['Subject'] = subject
     em.set_content(body)
 
-    context = ssl.create_default_context()
-
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-        smtp.login(email_sender, email_password)
-        smtp.sendmail(email_sender, email_receiver, em.as_string())
+    smtp.sendmail(email_sender, email_receiver, em.as_string())
 
 
 # main
