@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#Script : LAB2_OpsChallenge02.py
+#Script : OpsChallenge02.py
 #Purpose: Create an uptime sensor tool that uses ICMP packets to evaluate if hosts on the LAN are up or down
 #Why    : Good to practice how to use timestamps and kernel resources in conjuction with flow controls as 'while'
 
