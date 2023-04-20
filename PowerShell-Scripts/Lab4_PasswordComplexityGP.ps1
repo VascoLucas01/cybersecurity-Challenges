@@ -1,4 +1,4 @@
-# Script : LAB4_PasswordComplexityGP.ps1
+# Script : Lab4_PasswordComplexityGP.ps1
 # Purpose: Automate the process of enable/disable password complexity
 # Why    : As a measure of security.
 
