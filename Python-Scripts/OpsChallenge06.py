@@ -6,6 +6,9 @@
 
 from cryptography.fernet import Fernet
 import os
+import tarfile
+import datetime
+from tqdm import tqdm
 
 ### funtions
 # Function name: write_key
@@ -13,7 +16,6 @@ import os
 # Arguments    : none
 # Return       : none
 def write_key():
-
     key = Fernet.generate_key()
     with open("key","wb") as key_file:
         key_file.write(key)
@@ -38,8 +40,10 @@ def encrypt_file(file_path, fernet):
 
         with open(file_path, 'wb') as encrypted_file:
             encrypted_file.write(ciphertext)
-
-        # os.system(f"rm {file_path}")
+            if want_to_compress(encrypted_file):
+                timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S.%f')
+                compress(f"compressed_{timestamp}.tar.gz",[file_path])
+                os.system(f"rm {file_path}")
     else:
         print(f"The file {file_path} does not exists")
 
