@@ -1,22 +1,34 @@
 #!/usr/bin/python3
 
 # Script : OpsChallenge06.py
-# Purpose: 
-# Why    : 
+# Purpose: Prompts the user to select if he/she want to encrpt/decrypt a file/string
+# Why    : It is important to understand how to encrypt/decrypt data at rest
 
 from cryptography.fernet import Fernet
 import os
 
-# funtions
+### funtions
+# Function name: write_key
+# Purpose      : Generates a key that will be used to encrypt and decrypt and save it to a file. Symmetric cryptography.
+# Arguments    : none
+# Return       : none
 def write_key():
 
     key = Fernet.generate_key()
     with open("key","wb") as key_file:
         key_file.write(key)
 
+# Function name: load_key
+# Purpose      : Loads the key saved in a file
+# Arguments    : none
+# Return       : The key read from the file
 def load_key():
     return open("key","rb").read()
 
+# Function name: encrypt_file
+# Purpose      : Encrypts a file
+# Arguments    : file_path, fernet
+# Return       : none
 def encrypt_file(file_path, fernet):
     if os.path.exists(file_path):
         with open(file_path, 'rb') as file:
@@ -31,6 +43,10 @@ def encrypt_file(file_path, fernet):
     else:
         print(f"The file {file_path} does not exists")
 
+# Function name: decrypt_file
+# Purpose      : Decrypts a file
+# Arguments    : file_path, fernet
+# Return       : none
 def decrypt_file(file_path, fernet):
     if os.path.exists(file_path):
         with open(file_path, 'rb') as file:
@@ -43,16 +59,26 @@ def decrypt_file(file_path, fernet):
     else:
         print(f"The file {file_path} does not exists")
 
+# Function name: encrypt_string
+# Purpose      : Encrypts a string and print to the standard output the ciphertext
+# Arguments    : string, fernet
+# Return       : none
 def encrypt_string(string,fernet):
     encoded_string   = string.encode()
     encrypted_string = fernet.encrypt(encoded_string).decode()
     print(f"\nCiphertext: {encrypted_string}\n")
 
+# Function name: decrypt_string
+# Purpose      : Decrypts a string and print to the standard output the plaintext
+# Arguments    : string, fernet
+# Return       : none
 def decrypt_string(string,fernet):
     decrypted_string = fernet.decrypt(string.encode()).decode()
     print(f"\nPlaintext: {decrypted_string}\n")
 
-    # main
+# main
+
+
 try:
     key = load_key()
 except FileNotFoundError:
@@ -61,6 +87,7 @@ except FileNotFoundError:
 except:
     print("\n ----- An unexpected error occured during a load key -----\n")
 
+# initialize the Fernet class
 fernet = Fernet(key)
 
 while(True):
