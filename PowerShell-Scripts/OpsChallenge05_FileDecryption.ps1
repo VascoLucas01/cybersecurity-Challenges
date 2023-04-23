@@ -2,6 +2,14 @@
 # Purpose: Decrypts a file
 # Why    : As a measure of security.
 
+
+
+$filePath = "C:\Documents\test.txt"
+(Get-Item -Path $filePath).Decrypt()
+
+
+
+############################################## Decrypts with 7-Zip ######################################
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=-$True)]
@@ -30,3 +38,4 @@ try{
 catch{
     Write-Output $_.Exception.Message
 }
+#######################################################################################################
