@@ -75,10 +75,55 @@ def encrypt_string(string,fernet):
 def decrypt_string(string,fernet):
     decrypted_string = fernet.decrypt(string.encode()).decode()
     print(f"\nPlaintext: {decrypted_string}\n")
+    
+########## Functions from https://www.thepythoncode.com/article/compress-decompress-files-tarfile-python ############
+def compress(tar_file, members):
+    """
+    Adds files ('members') to a tar_file and compress it
+    """
+
+    # open file for gzip compressed writing
+    tar = tarfile.open(tar_file, mode="w:gz")
+
+    # with progress bar
+    # set the progress bar
+    progress = tqdm(members)
+    for member in progress:
+        # add file/folder/link to the tar file (compress)
+        tar.add(member)
+        # set the progress description of the progress bar
+        progress.set_description(f"Compressing {member}")
+
+    # close the file
+    tar.close()
+
+# this funtion is not used in this script
+def decompress(tar_file, path, members=None):
+    """
+    Extracts 'tar_file' and puts the 'members' to 'path'
+    If members is None, all members on 'tar_file' will be extracted
+    """
+
+    tar = tarfile.open(tar_file, mode="r:gz")
+    if members is None:
+        members = tar.getmembers()
+
+    # with progress bar
+    # set the progress bar
+    progress = tqdm(members)
+    for member in progress:
+        tar.extract(member, path=path)
+        # set the progress description of the progress bar
+        progress.set_description(f"Extracting {member.name}")
+
+    # or use this
+    # tar.extractall(members=members, path=path)
+    # close the file
+    tar.close()
+#####################################################################################################################
+
 
 # main
-
-
 try:
     key = load_key()
 except FileNotFoundError:
