@@ -2,6 +2,13 @@
 # Purpose: Encrypts a file
 # Why    : As a measure of security.
 
+
+$filePath = "C:\Documents\test.txt"
+(Get-Item -Path $filePath).Encrypt()
+
+
+###################################################### Encrypts with 7-Zip ####################################################
+### LIMITATIONS: Does not encrypt a folder
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=-$True)]
@@ -33,3 +40,4 @@ try{
 catch{
     Write-Output $_.Exception.Message
 }
+################################################################################################################################
