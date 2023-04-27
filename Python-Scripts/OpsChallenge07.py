@@ -10,6 +10,9 @@ import tarfile
 import datetime
 from tqdm import tqdm
 
+ENCRYPT = 0
+DECRYPT = 1
+
 ### funtions
 # Function name: write_key
 # Purpose      : Generates a key that will be used to encrypt and decrypt and save it to a file. Symmetric cryptography.
