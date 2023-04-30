@@ -303,10 +303,9 @@ def decompress(tar_file, path, members=None):
 #####################################################################################################################
         
 # main
-key = get_key()
 
 # initialize the Fernet class
-fernet = Fernet(key)
+fernet = Fernet(get_key())
 
 while(True):
 
