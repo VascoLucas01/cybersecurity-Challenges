@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-# Script : 
-# Purpose: 
-# Why    : 
+# Script : OpsChallenge11.py
+# Purpose: Scan a host in order to find open ports
+
 
 from scapy.all import *
 
