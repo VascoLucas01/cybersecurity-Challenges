@@ -2,6 +2,7 @@
 
 # Script : OpsChallenge11.py
 # Purpose: Scan a host in order to find open ports
+# Why    : Understand better how a scan functions
 
 
 from scapy.all import *
