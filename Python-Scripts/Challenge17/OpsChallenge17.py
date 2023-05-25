@@ -33,6 +33,7 @@ def mode2(string,wordlist):
     else:
         print(f"\nThe string \"{string}\" was not found!")
  
+
 # Function name: mode3
 # Purpose      : Makes a SSH connection
 # Arguments    : hostname, username, password, port
