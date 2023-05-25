@@ -7,6 +7,11 @@
 import time
 import paramiko
 
+### funtions
+# Function name: mode1
+# Purpose      : Opens a file with one word at each line and displays those words at 1 second intervals
+# Arguments    : file
+# Return       : none
 def mode1(file):
     print("\n")
     
@@ -16,13 +21,22 @@ def mode1(file):
     for w in wordlist:
         time.sleep(1)  
         print(w)
-    
+  
+
+# Function name: mode2
+# Purpose      : Verifies if the string passed as an argument is in the wordlist passed as another argument
+# Arguments    : string, wordlist
+# Return       : none
 def mode2(string,wordlist):
     if(string in wordlist):
         print(f"\nThe string \"{string}\" was found!")
     else:
         print(f"\nThe string \"{string}\" was not found!")
-    
+ 
+# Function name: mode3
+# Purpose      : Makes a SSH connection
+# Arguments    : hostname, username, password, port
+# Return       : none
 def mode3(hostname, username, password, port):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
