@@ -140,7 +140,11 @@ def unzip_file(zip_file_path, extract_path, passwd):
         zip_ref.extractall(extract_path)
         
               
-def mode4(file_path, zip_file_path, passwd):
+def zip_and_unzip(file_path, zip_file_path, passwd):
+    file_path     = input("\nEnter the file:\n\n>")
+    zip_file_path = input("\nEnter the zip file:\n\n>") 
+    passwd        = input("\nEnter the password:\n\n>")
+    
     zip = [zip_file_path,".zip"]
     zip = ''.join(zip)
     create_encrypted_zip(file_path, zip, passwd)
@@ -149,6 +153,28 @@ def mode4(file_path, zip_file_path, passwd):
     unzip_file("file.zip", "/home/vascolucas01" ,"file")
     
  
+def mode4(zip_file_path, wordlist):
+    with open(wordlist, 'r', encoding='utf-8') as wordlist_file:
+        passwords = wordlist_file.readlines()
+
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        for password in passwords:
+            password = password.strip()  # Remove newline characters
+
+        try:
+            zip_ref.extractall(pwd=password.encode())
+            print(f"Password found: {password}")
+            break
+        except Exception:
+            pass
+
+
+
+# Usage example:
+zip_file_path = 'path_to_password_protected_zip_file.zip'
+wordlist_path = 'path_to_RockYou.txt'
+
+brute_force_zip(zip_file_path, wordlist_path)
   
   
   
@@ -177,11 +203,7 @@ def main():
                 wordlist = input("\nEnter the path to the wordlist:\n\n>")
                 mode3_v2("192.168.1.139", "vasco", wordlist, 22, fernet)
             case "4": 
-                
-                ### zip
-                file_path     = input("\nEnter the file:\n\n>")
-                zip_file_path = input("\nEnter the zip file:\n\n>") 
-                passwd        = input("\nEnter the password:\n\n>")
+
 
                 mode4()
                 
@@ -193,3 +215,4 @@ def main():
             
 if __name__ == "__main__":
     main()
+
