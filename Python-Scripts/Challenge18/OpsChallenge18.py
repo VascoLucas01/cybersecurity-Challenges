@@ -34,7 +34,11 @@ def mode2(string,wordlist):
         print(f"\nThe string \"{string}\" was found!")
     else:
         print(f"\nThe string \"{string}\" was not found!")
-    
+
+# Function name: mode3
+# Purpose      : Makes a SSH connection
+# Arguments    : hostname, username, password, port
+# Return       : none
 def mode3(hostname, username, password, port):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
