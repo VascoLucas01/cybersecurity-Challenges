@@ -57,6 +57,10 @@ def mode3(hostname, username, password, port):
     except:
         print("\n ----- Something went wrong -----\n")
 
+# Function name: mode3_v2
+# Purpose      : Takes a worlist to brute force a SSH connection
+# Arguments    : hostname, username, wordlist, port
+# Return       : none
 def mode3_v2(hostname, username, wordlist, port,fernet):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
