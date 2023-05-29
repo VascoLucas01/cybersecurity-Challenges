@@ -9,6 +9,11 @@ import paramiko
 from cryptography.fernet import Fernet
 import zipfile
 
+### funtions
+# Function name: mode1
+# Purpose      : Opens a file with one word at each line and displays those words at 1 second intervals
+# Arguments    : file
+# Return       : none
 def mode1(file):
     print("\n")
     
