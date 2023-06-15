@@ -7,11 +7,11 @@
 import time
 
 ### funtions
-# Function name: mode1
+# Function name: print_words_from_file
 # Purpose      : Opens a file with one word at each line and displays those words at 1 second intervals
 # Arguments    : file
 # Return       : none
-def mode1(file):
+def print_words_from_file(file):
     print("\n")
     
     with open(file, 'r') as file:
@@ -22,11 +22,11 @@ def mode1(file):
         print(w)
   
 
-# Function name: mode2
+# Function name: search_str
 # Purpose      : Verifies if the string passed as an argument is in the wordlist passed as another argument
 # Arguments    : string, wordlist
 # Return       : none
-def mode2(string,wordlist):
+def search_str(string,wordlist):
     if(string in wordlist):
         print(f"\nThe string \"{string}\" was found!")
     else:
@@ -41,11 +41,11 @@ while(True):
     match(user_input):
         case "1":
             wordlist = input("\nEnter the path to the wordlist:\n\n>")
-            mode1(wordlist)
+            print_words_from_file(wordlist)
         case "2":
             string = input("\nEnter a string:\n\n>")
             wordlist = input("\nEnter the path to the wordlist:\n\n>")
-            mode2(string,wordlist)
+            search_str(string,wordlist)
         case "q":
             print("\nQuitting...")
             break
