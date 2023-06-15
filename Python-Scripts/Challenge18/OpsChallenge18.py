@@ -10,11 +10,11 @@ from cryptography.fernet import Fernet
 import zipfile
 
 ### funtions
-# Function name: mode1
+# Function name: print_words_from_file
 # Purpose      : Opens a file with one word at each line and displays those words at 1 second intervals
 # Arguments    : file
 # Return       : none
-def mode1(file):
+def print_words_from_file(file):
     print("\n")
     
     with open(file, 'r') as file:
@@ -25,21 +25,21 @@ def mode1(file):
         print(w)
     
 
-# Function name: mode2
+# Function name: search_str
 # Purpose      : Verifies if the string passed as an argument is in the wordlist passed as another argument
 # Arguments    : string, wordlist
 # Return       : none
-def mode2(string,wordlist):
+def search_str(string,wordlist):
     if(string in wordlist):
         print(f"\nThe string \"{string}\" was found!")
     else:
         print(f"\nThe string \"{string}\" was not found!")
 
-# Function name: mode3
+# Function name: ssh_conn
 # Purpose      : Makes a SSH connection
 # Arguments    : hostname, username, password, port
 # Return       : none
-def mode3(hostname, username, password, port):
+def ssh_conn(hostname, username, password, port):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     
@@ -57,11 +57,11 @@ def mode3(hostname, username, password, port):
     except:
         print("\n ----- Something went wrong -----\n")
 
-# Function name: mode3_v2
+# Function name: ssh_conn_v2
 # Purpose      : Takes a worlist to brute force a SSH connection
 # Arguments    : hostname, username, wordlist, port
 # Return       : none
-def mode3_v2(hostname, username, wordlist, port,fernet):
+def ssh_conn_v2(hostname, username, wordlist, port,fernet):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     
@@ -164,11 +164,11 @@ def zip_and_unzip(file_path, zip_file_path, passwd):
     unzip_file("file.zip", "/home/vascolucas01" ,"file")
     
  
-# Function name: mode4
+# Function name: brute_force_zip_file
 # Purpose      : Brute force to unzip a file
 # Arguments    : zip_file_path, wordlist
 # Return       : none
-def mode4(zip_file_path, wordlist):
+def brute_force_zip_file(zip_file_path, wordlist):
     with open(wordlist, 'r', encoding='utf-8') as wordlist_file:
         passwords = wordlist_file.readlines()
 
@@ -195,22 +195,22 @@ def main():
         match(user_input):
             case "1":
                 wordlist = input("\nEnter the path to the wordlist:\n\n>")
-                mode1(wordlist)
+                print_words_from_file(wordlist)
             case "2":
                 string = input("\nEnter a string:\n\n>")
                 wordlist = input("\nEnter the path to the wordlist:\n\n>")
-                mode2(string,wordlist)
+                search_str(string,wordlist)
             case "3":
-                # mode3(hostname, username, password, port)
-                # mode3("192.168.1.139", "vasco", wordlist, 22)
-                # mode3_v2(hostname, username, wordlist, port)
+                # ssh_conn(hostname, username, password, port)
+                # ssh_conn("192.168.1.139", "vasco", wordlist, 22)
+                # ssh_conn_v2(hostname, username, wordlist, port)
                 wordlist = input("\nEnter the path to the wordlist:\n\n>")
-                mode3_v2("192.168.1.139", "vasco", wordlist, 22, fernet)
+                ssh_conn_v2("192.168.1.139", "vasco", wordlist, 22, fernet)
             case "4": 
                 zip_file = input("\nEnter the path to the zip file:\n\n>")
                 wordlist = input("\nEnter the path to the wordlist:\n\n>")
 
-                mode4(zip_file, wordlist)
+                brute_force_zip_file(zip_file, wordlist)
                 
             case "q":
                 print("\nQuitting...")
