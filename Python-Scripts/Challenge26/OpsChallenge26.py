@@ -7,14 +7,16 @@
 
 ################################################# Python Tool Chosen #################################################
 ######################################################################################################################
-#Script : OpsChallenge02.py
-#Purpose: Create an uptime sensor tool that uses ICMP packets to evaluate if hosts on the LAN are up or down
-#Why    : Good to practice how to use timestamps and kernel resources in conjuction with flow controls as 'while'
+# Script : OpsChallenge02.py
+# Purpose: Create an uptime sensor tool that uses ICMP packets to evaluate if hosts on the LAN are up or down
+# Why    : Good to practice how to use timestamps and kernel resources in conjuction with flow controls as 'while'
 
 # Import libraries
 import subprocess
 import datetime
 import time
+import logging 
+from logging.handlers import FileHandler
 
 # Function name: print_timestamp
 # Purpose      : prints a timestamp to the terminal
@@ -45,6 +47,13 @@ def print_timestamp_2_file(str,ip,file):
 #########################################################################
 
 def main():
+    log_file = 'OpsChallenge02.log'
+    log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_handler = FileHandler(log_file)
+    file_handler.setFormatter(log_formatter)
+    logging.basicConfig(level=logging.DEBUG, handlers=[file_handler])
+
+
     print_timestamp("\nStarting script LAB2_OpsChallenge02.py...",None)
 
     # filename to store the ping's status
