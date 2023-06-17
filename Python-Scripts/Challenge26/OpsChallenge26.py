@@ -25,9 +25,11 @@ from logging.handlers import FileHandler
 def print_timestamp(str,ip):
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
     if ip is None:
-        print(f'{timestamp} {str}')
+        logging.info(f'{timestamp} {str}')
+        #print(f'{timestamp} {str}')
     else:
-        print(f'{timestamp} {str} to {ip}')
+        logging.warning(f'{timestamp} {str}')
+        #print(f'{timestamp} {str} to {ip}')
     print("")
 
 
@@ -48,13 +50,13 @@ def print_timestamp_2_file(str,ip,file):
 
 def main():
     log_file = 'OpsChallenge02.log'
-    log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y/%d/%m %I:%M:%S %p')
     file_handler = FileHandler(log_file)
     file_handler.setFormatter(log_formatter)
     logging.basicConfig(level=logging.DEBUG, handlers=[file_handler])
 
 
-    print_timestamp("\nStarting script LAB2_OpsChallenge02.py...",None)
+    logging.info('\nStarting script OpsChallenge02.py...')
 
     # filename to store the ping's status
     filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
