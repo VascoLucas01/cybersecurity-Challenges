@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Script : OpsChallenge26.py
-# Purpose: 
+# Purpose: Add logging capabilities to OpsChallenge02.py; send log data to a file in the local directory
 # Why    : 
 
 
@@ -44,28 +44,33 @@ def print_timestamp_2_file(str,ip,file):
         f.write("\n")
 #########################################################################
 
-# main
-print_timestamp("\nStarting script LAB2_OpsChallenge02.py...",None)
+def main():
+    print_timestamp("\nStarting script LAB2_OpsChallenge02.py...",None)
 
-# filename to store the ping's status
-filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
+    # filename to store the ping's status
+    filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
 
-# inputs the user to enter the target IP
-target_ip = input("Enter your target IP: ")
+    # inputs the user to enter the target IP
+    target_ip = input("Enter your target IP: ")
 
-# infinite loop
-while True:
-    # store the output in the variable ping_output
-    ping_output = subprocess.run(["ping","-n","1",target_ip], stdout=subprocess.PIPE);
+    # infinite loop
+    while True:
+        # store the output in the variable ping_output
+        ping_output = subprocess.run(["ping","-n","1",target_ip], stdout=subprocess.PIPE);
 
-    # status' verification
-    if "Received = 1" in ping_output.stdout.decode('utf-8'):
-        print_timestamp("Network Active",target_ip)
-        #print_timestamp_2_file("Network Active",target_ip,filename)
-    else:
-        print_timestamp("Network Inactive",target_ip)
-        #print_timestamp_2_file("Network Active",target_ip,filename)    
-    
-    # pings every 2 seconds
-    time.sleep(2)
+        # status' verification
+        if "Received = 1" in ping_output.stdout.decode('utf-8'):
+            print_timestamp("Network Active",target_ip)
+            #print_timestamp_2_file("Network Active",target_ip,filename)
+        else:
+            print_timestamp("Network Inactive",target_ip)
+            #print_timestamp_2_file("Network Active",target_ip,filename)    
+        
+        # pings every 2 seconds
+        time.sleep(2)
+
+
+if __name__ = "__main__":
+    main()
+
 ######################################################################################################################
