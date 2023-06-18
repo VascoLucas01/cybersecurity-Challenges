@@ -56,7 +56,7 @@ def main():
     logging.basicConfig(level=logging.DEBUG, handlers=[file_handler])
 
 
-    logging.info('Starting script OpsChallenge02.py...\n')
+    logging.info('Starting script OpsChallenge26.py...\n')
 
     # filename to store the ping's status
     filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
