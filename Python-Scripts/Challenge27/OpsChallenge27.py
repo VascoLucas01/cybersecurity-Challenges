@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Script : OpsChallenge27.py
-# Purpose: Add logging capabilities to OpsChallenge02.py; send log data to a file in the local directory
+# Purpose: Add a log rotation feature based on size
 # Why    :
 
 
