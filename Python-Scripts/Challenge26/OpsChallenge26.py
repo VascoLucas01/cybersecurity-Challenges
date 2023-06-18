@@ -2,7 +2,7 @@
 
 # Script : OpsChallenge26.py
 # Purpose: Add logging capabilities to OpsChallenge02.py; send log data to a file in the local directory
-# Why    : 
+# Why    :
 
 
 ################################################# Python Tool Chosen #################################################
@@ -15,8 +15,8 @@
 import subprocess
 import datetime
 import time
-import logging 
-from logging.handlers import FileHandler
+import logging
+from logging.handlers import RotatingFileHandler
 
 # Function name: print_timestamp
 # Purpose      : prints a timestamp to the terminal
@@ -25,15 +25,15 @@ from logging.handlers import FileHandler
 def print_timestamp(str,ip):
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
     if ip is None:
-        logging.info(f'{timestamp} {str}')
+        logging.warning(f'{timestamp} {str}')
         #print(f'{timestamp} {str}')
     else:
-        logging.warning(f'{timestamp} {str}')
+        logging.info(f'{timestamp} {str} to {ip}')
         #print(f'{timestamp} {str} to {ip}')
     print("")
 
 
-############################# Stretch Goal #############################   
+############################# Stretch Goal #############################
 # Function name: print_timestamp_2_file
 # Purpose      : prints a timestamp to a file
 # Arguments    : str, ip, file
@@ -49,36 +49,42 @@ def print_timestamp_2_file(str,ip,file):
 #########################################################################
 
 def main():
-    log_file = 'OpsChallenge02.log'
+    log_file = 'OpsChallenge26.log'
     log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y/%d/%m %I:%M:%S %p')
-    file_handler = FileHandler(log_file)
+    file_handler = RotatingFileHandler(log_file)
     file_handler.setFormatter(log_formatter)
     logging.basicConfig(level=logging.DEBUG, handlers=[file_handler])
 
 
-    logging.info('\nStarting script OpsChallenge02.py...')
+    logging.info('Starting script OpsChallenge02.py...\n')
 
     # filename to store the ping's status
     filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
 
     # inputs the user to enter the target IP
     target_ip = input("Enter your target IP: ")
+    ping_output = None
 
     # infinite loop
     while True:
-        # store the output in the variable ping_output
-        ping_output = subprocess.run(["ping","-n","1",target_ip], stdout=subprocess.PIPE);
 
-        # status' verification
-        if "Received = 1" in ping_output.stdout.decode('utf-8'):
-            print_timestamp("Network Active",target_ip)
-            #print_timestamp_2_file("Network Active",target_ip,filename)
+        try:
+            # store the output in the variable ping_output
+            ping_output = subprocess.run(["ping","-c","1",target_ip], stdout=subprocess.PIPE, timeout=3)
+        except subprocess.TimeoutExpired as e:
+            logging.warning("Timeout Expired")
         else:
-            print_timestamp("Network Inactive",target_ip)
-            #print_timestamp_2_file("Network Active",target_ip,filename)    
-        
-        # pings every 2 seconds
-        time.sleep(2)
+
+            # status' verification
+            if "1 received" in ping_output.stdout.decode('utf-8'):
+                print_timestamp("Network Active",target_ip)
+                #print_timestamp_2_file("Network Active",target_ip,filename)
+            else:
+                print_timestamp("Network Inactive",target_ip)
+                #print_timestamp_2_file("Network Active",target_ip,filename)
+
+            # pings every 2 seconds
+            time.sleep(2)
 
 
 if __name__ == "__main__":
