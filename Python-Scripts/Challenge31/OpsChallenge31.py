@@ -3,7 +3,7 @@
 import os
 
 # Script : OpsChallenge28.py
-# Purpose: Add a log rotation feature based on size
+# Purpose: Prompt the user to type in a file name to search for; Prompt the user for a directory to search in; Search each file in the directory by name; For each positive detection, print to the screen the file name and location; At the end of the search process, print to the screen how many files were searched and how many hits were found
 # Why    :
 
 # Function to search for a file in a directory
