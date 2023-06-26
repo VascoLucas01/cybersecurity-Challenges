@@ -2,7 +2,7 @@
 
 import os
 
-# Script : OpsChallenge28.py
+# Script : OpsChallenge31.py
 # Purpose: Prompt the user to type in a file name to search for; 
 # ######## Prompt the user for a directory to search in; 
 # ######## Search each file in the directory by name; 
