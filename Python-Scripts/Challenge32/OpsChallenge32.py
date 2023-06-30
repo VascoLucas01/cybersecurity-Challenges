@@ -5,11 +5,20 @@ import hashlib
 import time
 
 # Function to recursively scan files and folders in the directory
-def scan_directory(directory):
+def scan_directory(directory,processed_files):
+
+
     for root, dirs, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(root, file)
             file_size = os.path.getsize(file_path)
+
+            # Skip the file if it has already been processed
+            if file_path in processed_files:
+                continue
+
+            # Add the file path to the set of processed files
+            processed_files.add(file_path)
 
             # Generate MD5 hash of the file
             md5_hash = generate_md5_hash(file_path)
@@ -27,7 +36,11 @@ def scan_directory(directory):
 
         for subdir in dirs:
             subdir_path = os.path.join(root, subdir)
-            scan_directory(subdir_path)
+            scan_directory(subdir_path,processed_files)
+
+
+
+
 
 # Function to generate MD5 hash of a file
 def generate_md5_hash(file_path):
@@ -42,7 +55,9 @@ def main():
     print("---------------------------------------------")
     print("           SCAN RESULTS")
     print("---------------------------------------------")
-    scan_directory(directory_to_scan)
+    processed_files = set()
+    scan_directory(directory_to_scan,processed_files)
+
 
 if __name__ == "__main__":
     main()
