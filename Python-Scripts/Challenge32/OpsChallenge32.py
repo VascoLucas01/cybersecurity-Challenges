@@ -4,6 +4,14 @@ import os
 import hashlib
 import time
 
+
+# Script : OpsChallenge32.py
+# Purpose: Alter your search code from OpsChallenge31.py to recursively scan each file and folder in the user input directory path and print it to the screen;
+# ######## Generate the file’s MD5 hash using Hashlib;
+# ######## Assign the MD5 hash to a variable; 
+# ######## Print the variable to the screen along with a timestamp, file name, file size, and complete (not symbolic) file path; 
+# Why    :
+
 # Function to recursively scan files and folders in the directory
 def scan_directory(directory,processed_files):
 
