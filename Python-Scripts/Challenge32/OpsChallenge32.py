@@ -1,48 +1,48 @@
 #!/usr/bin/python3
 
 import os
+import hashlib
+import time
 
-# Script : OpsChallenge32.py
-# Purpose: Prompt the user to type in a file name to search for; 
-# ######## Prompt the user for a directory to search in; 
-# ######## Search each file in the directory by name; 
-# ######## For each positive detection, print to the screen the file name and location; 
-# ######## At the end of the search process, print to the screen how many files were searched and how many hits were found
-# Why    :
-
-# Function to search for a file in a directory
-def search_files(directory, filename):
-    hits           = 0
-    searched_files = 0
-
-    for root, _, files in os.walk(directory):
+# Function to recursively scan files and folders in the directory
+def scan_directory(directory):
+    for root, dirs, files in os.walk(directory):
         for file in files:
-            if file == filename:
-                hits += 1
-                print(f"\nFound: {os.path.join(root, file)}")
-            searched_files += 1
-    return searched_files, hits
+            file_path = os.path.join(root, file)
+            file_size = os.path.getsize(file_path)
 
+            # Generate MD5 hash of the file
+            md5_hash = generate_md5_hash(file_path)
+
+            # Get current timestamp
+            timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+
+            # Print file information
+            print(f"Timestamp: {timestamp}")
+            print(f"File Name: {file}")
+            print(f"File Size: {file_size} bytes")
+            print(f"File Path: {file_path}")
+            print(f"MD5 Hash: {md5_hash}")
+            print("---------------------------------------------")
+
+        for subdir in dirs:
+            subdir_path = os.path.join(root, subdir)
+            scan_directory(subdir_path)
+
+# Function to generate MD5 hash of a file
+def generate_md5_hash(file_path):
+    md5_hash = hashlib.md5()
+    with open(file_path, "rb") as file:
+        for chunk in iter(lambda: file.read(4096), b""):
+            md5_hash.update(chunk)
+    return md5_hash.hexdigest()
 
 def main():
-    filename_to_search  = input("Enter the filename to search for:\n\t> ")
-    directory_to_search = input("\nEnter the directory to search for:\n\t> ")
-
-    # Execute different commands based on the operating system
-    if os.name == "posix":  # Linux
-        searched_files, hits = search_files(directory_to_search, filename_to_search)
-    elif os.name == "nt":  # Windows
-        directory_to_search  = directory_to_search.replace("/", "\\")
-        searched_files, hits = search_files(directory_to_search, filename_to_search)
-    else:
-        print("Unsupported operating system.")
-    searched_files, hits = 0, 0
-
-
-    print("\n---------------------------------------------")
-    print("                STATISTICS")
+    directory_to_scan = input("Enter the directory path to scan:\n\t> ")
     print("---------------------------------------------")
-    print("     SEARCHED FILES       |       HITS")
-    print(f"            {searched_files}             |         {hits}")
+    print("           SCAN RESULTS")
+    print("---------------------------------------------")
+    scan_directory(directory_to_scan)
+
 if __name__ == "__main__":
     main()
