@@ -54,7 +54,7 @@ def scan_directory(directory,processed_files):
 def generate_md5_hash(file_path):
     md5_hash = hashlib.md5()
     with open(file_path, "rb") as file:
-        for chunk in iter(lambda: file.read(4096), b""):
+        for chunk in iter(lambda: file.read(1024), b""):
             md5_hash.update(chunk)
     return md5_hash.hexdigest()
 
