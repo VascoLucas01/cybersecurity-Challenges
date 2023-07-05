@@ -6,6 +6,13 @@ import time
 from dotenv import load_dotenv
 #from virustotalsearch import VT_Request
 
+
+# Script : OpsChallenge33.py
+# Purpose: Successfully connect to the VirusTotal API
+# ######## Automatically compare your target file’s md5 hash with the hash values of entries on VirusTotal API;
+# ######## Print to the screen the number of positives detected and total files scanned; 
+# Why    :
+
 # Function to recursively scan files and folders in the directory
 def scan_directory(api_key,directory,processed_files):
 
