@@ -4,7 +4,7 @@ import os
 import hashlib
 import time
 from dotenv import load_dotenv
-from virustotalsearch import VT_Request
+#from virustotalsearch import VT_Request
 
 # Function to recursively scan files and folders in the directory
 def scan_directory(api_key,directory,processed_files):
