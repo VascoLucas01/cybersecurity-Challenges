@@ -4,7 +4,6 @@
 # Purpose:
 # Why    :
 
-import subprocess
 import os
 
 def banner_grabbing_netcat(url_ip,port_number):
