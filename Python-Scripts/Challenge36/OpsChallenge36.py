@@ -8,22 +8,23 @@ import subprocess
 import os
 
 def banner_grabbing_netcat(url_ip,port_number):
-    result = os.system(f'nc -w 2 {url_ip} {port_number}')
+    result = os.system(f'nc -w1 {url_ip} {port_number}')
     print(result)
-    #result = subprocess.run(['nc', '-w2', url_ip, port_number], capture_output=True, text=True)
-    #print(result.stdout)
 
 def banner_grabbing_telnet(url_ip,port_number):
-    os.system(f'telnet {url_ip} {port_number}')
+    result = os.system(f'telnet {url_ip} {port_number}')
+    print(result)
 
-def banner_grabbing_nmap(url_ip,port_number):
-    print("nmap")
+def banner_grabbing_nmap(url_ip):
+    result = os.system(f'nmap -p 1-1024 -sV {url_ip}')
+    print(result)
 
 def main():
 
         url_ip      = input("Enter the URL or IP address:\n\t> ")
         port_number = input("\nEnter the port number:\n\t> ")
-
+        
+        
         while(True):
 
             user_input = input("\n\n---> Select one of the following (1,2,3 or q):\n\n1. Netcat;\n2. Telnet\n3. Nmap\nq. Quit\n\n> ")
@@ -36,7 +37,7 @@ def main():
                     banner_grabbing_telnet(url_ip,port_number)
                     break
                 case "3":
-                    banner_grabbing_nmap(url_ip,port_number)
+                    banner_grabbing_nmap(url_ip)
                     break
                 case "q":
                     print("\nQuitting...")
