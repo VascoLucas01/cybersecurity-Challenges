@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#Script : OpsChallenge03.py
+#Script : Uptime_Sensor_Tool_Part_2.py
 #Purpose: Sends an email.
 #Why    : It is an automation.
 
@@ -41,7 +41,7 @@ def sendEmail(email_sender,host,status):
 
 # main
 timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
-print("\nStarting script LAB3_OpsChallenge03.py...\n")
+print("\nStarting script Uptime_Sensor_Tool_Part_2.py...\n")
 
 # inputs the user to enter the email sender, email password and target IP
 email_sender    = input("\nEnter an email to use as necessary: ")
