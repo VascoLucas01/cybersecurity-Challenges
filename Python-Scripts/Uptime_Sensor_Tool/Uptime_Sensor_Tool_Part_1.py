@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#Script : OpsChallenge02.py
+#Script : Uptime_Sensor_Tool_Part_1.py
 #Purpose: Create an uptime sensor tool that uses ICMP packets to evaluate if hosts on the LAN are up or down
 #Why    : Good to practice how to use timestamps and kernel resources in conjuction with flow controls as 'while'
 
@@ -38,7 +38,7 @@ def print_timestamp_2_file(str,ip,file):
 #########################################################################
 
 # main
-print_timestamp("\nStarting script LAB2_OpsChallenge02.py...",None)
+print_timestamp("\nStarting script Uptime_Sensor_Tool_Part_1.py...",None)
 
 # filename to store the ping's status
 filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
