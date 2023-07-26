@@ -2,6 +2,9 @@
 
 #Script : Uptime_Sensor_Tool_Part_2.py
 #Purpose: Sends an email.
+######### Ask the user for an email address and password to use for sending notifications
+######### Send an email to the administrator if a host status changes (from “up” to “down” or “down” to “up”)
+######### Clearly indicate in the message which host status changed, the status before and after, and a timestamp of the event.
 #Why    : It is an automation.
 
 # import libraries
