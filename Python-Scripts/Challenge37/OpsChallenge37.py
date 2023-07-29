@@ -14,7 +14,26 @@ def print_cookies(cookies):
         print('cookie value = ' + cookie.value)
         print('******************************************')
 
+def bringforthcookiemonster(): # Because why not!
+    print('''
+
+              .---. .---.
+             :     : o   :    me want cookie!
+         _..-:   o :     :-.._    /
+     .-''  '  `---' `---' "   ``-.
+   .'   "   '  "  .    "  . '  "  `.
+  :   '.---.,,.,...,.,.,.,..---.  ' ;
+  `. " `.                     .' " .'
+   `.  '`.                   .' ' .'
+    `.    `-._           _.-' "  .'  .----.
+      `. "    '"--...--"'  . ' .'  .'  o   `.
+
+        ''')
+
+
 def main():
+
+    bringforthcookiemonster()
 
     url = 'https://google.com'
     
