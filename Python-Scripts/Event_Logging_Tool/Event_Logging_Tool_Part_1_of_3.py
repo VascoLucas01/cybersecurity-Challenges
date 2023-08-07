@@ -49,7 +49,7 @@ def print_timestamp_2_file(str,ip,file):
 #########################################################################
 
 def main():
-    log_file = 'Event_Logging_Tool_Part_1_of_3.py'
+    log_file = 'Event_Logging_Tool_Part_1_of_3.log'
     log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y/%d/%m %I:%M:%S %p')
     file_handler = RotatingFileHandler(log_file)
     file_handler.setFormatter(log_formatter)
