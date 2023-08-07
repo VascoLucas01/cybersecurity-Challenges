@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Script : File_Encryption_Tool_Part_1_of_3.py
-# Purpose: Prompts the user to select if he/she want to encrpt/decrypt a file/string
+# Purpose: Prompts the user to select if he/she want to encrpt/decrypt a file/string 
 # Why    : It is important to understand how to encrypt/decrypt data at rest
 
 from cryptography.fernet import Fernet
