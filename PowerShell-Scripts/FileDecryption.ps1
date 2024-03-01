@@ -1,4 +1,4 @@
-# Script : OpsChallenge05_FileDecryption.ps1
+# Script : FileDecryption.ps1
 # Purpose: Decrypts a file
 # Why    : As a measure of security.
 
