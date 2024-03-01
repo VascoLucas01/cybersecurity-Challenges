@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#Script : Uptime_Sensor_Tool_Part_1.py
+#Script : Uptime_Sensor_Tool_Part_1_of_2.py
 #Purpose: Create an uptime sensor tool that uses ICMP packets to evaluate if hosts on the LAN are up or down
 ######### Transmit a single ICMP (ping) packet to a specific IP every two seconds
 ######### Evaluate the response as either success or failure
@@ -42,7 +42,7 @@ def print_timestamp_2_file(str,ip,file):
 #########################################################################
 
 # main
-print_timestamp("\nStarting script Uptime_Sensor_Tool_Part_1.py...",None)
+print_timestamp("\nStarting script Uptime_Sensor_Tool_Part_1_of_2.py...",None)
 
 # filename to store the ping's status
 filename  = "{}_logs".format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
