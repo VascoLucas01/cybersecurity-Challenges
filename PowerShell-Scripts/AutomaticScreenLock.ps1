@@ -1,4 +1,4 @@
-# Script : Lab1_AutomaticScreenLock.ps1
+# Script : AutomaticScreenLock.ps1
 # Purpose: The user needs to enter a value in seconds which will be the timeout to lock the computer's screen due to inactivity 
 # Why    : As a measure of security.
 
@@ -13,7 +13,7 @@ param (
     [string]$screenTimeout
 )
 
-Write-Verbose "Starting LAB1_AutomaticScreenLock.ps1 script..."
+Write-Verbose "Starting AutomaticScreenLock.ps1 script..."
 
 $path     = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
 $name     = 'InactivityTimeoutSecs'
