@@ -1,8 +1,8 @@
-# Script : Lab4_SMBv1.ps1
+# Script : DisableSMBv1.ps1
 # Purpose: Automate the process of disable SMBv1
 # Why    : As a measure of security.
 
-# ./LAB4_SMBv1.ps1
+# ./DisableSMBv1.ps1
 
 $path     = "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters"
 $name     = "SMB1"
