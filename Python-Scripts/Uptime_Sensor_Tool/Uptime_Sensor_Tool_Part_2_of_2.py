@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#Script : Uptime_Sensor_Tool_Part_2.py
+#Script : Uptime_Sensor_Tool_Part_2_of_2.py
 #Purpose: Sends an email.
 ######### Ask the user for an email address and password to use for sending notifications
 ######### Send an email to the administrator if a host status changes (from “up” to “down” or “down” to “up”)
@@ -44,7 +44,7 @@ def sendEmail(email_sender,host,status):
 
 # main
 timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
-print("\nStarting script Uptime_Sensor_Tool_Part_2.py...\n")
+print("\nStarting script Uptime_Sensor_Tool_Part_2_of_2.py...\n")
 
 # inputs the user to enter the email sender, email password and target IP
 email_sender    = input("\nEnter an email to use as necessary: ")
